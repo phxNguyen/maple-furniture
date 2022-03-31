@@ -1,40 +1,38 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
-import {
-  MailOutlined,
-  AppstoreOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-const { SubMenu } = Menu;
+import { UserAddOutlined, UserOutlined, SkinOutlined } from "@ant-design/icons";
+import { Link } from "react-router-dom";
+const { SubMenu, Item } = Menu;
 
 const Header = () => {
-  const [state, setState] = useState("");
+  const [current, setCurrent] = useState("home");
 
-  const handleClick = () =>{ 
-    //
+  const handleClick = (e) => {
+    setCurrent(e.key);
   };
 
   return (
-    <Menu onClick={handleClick}  mode="horizontal">
-      <Menu.Item key="mail" >
-        Home
-      </Menu.Item>
-      
-      <SubMenu
-        key="SubMenu"
-        title="Navigation Three - Submenu"
-      >
-        <Menu.ItemGroup title="Item 1">
-          <Menu.Item key="setting:1">Option 1</Menu.Item>
-          <Menu.Item key="setting:2">Option 2</Menu.Item>
-        </Menu.ItemGroup>
-        <Menu.ItemGroup title="Item 2">
-          <Menu.Item key="setting:3">Option 3</Menu.Item>
-          <Menu.Item key="setting:4">Option 4</Menu.Item>
-        </Menu.ItemGroup>
-      </SubMenu>
+    <>
+      <div className="container-fluid">
+      <Menu onClick={handleClick} mode="horizontal">
+        <Item key="home" icon={<SkinOutlined />}>
+          <Link to="/">Home</Link>
+        </Item>
 
-    </Menu>
+        <SubMenu key="SubMenu" title="Navigation">
+          <Item key="setting:1">Option 1</Item>
+          <Item key="setting:2">Option 2</Item>
+        </SubMenu>
+
+        <Item key="register" icon={<UserAddOutlined />} className="float-end">
+          <Link to="/register">Register</Link>
+        </Item>
+        <Item key="login" icon={<UserOutlined />} className="float-end">
+          <Link to="/login">Login</Link>
+        </Item>
+      </Menu>
+      </div>
+    </>
   );
 };
 
