@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { auth, googleAuthProvider } from "../../firebase";
 import { toast } from "react-toastify";
 import { Button } from "antd";
 import { MailOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("phuoc01478520@gmail.com");
   const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
+
+  //redirect ve home page khi user da dang nhap
+  const { user } = useSelector((state) => ({ ...state }));
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user]);
+
   let dispatch = useDispatch();
+
   const handleSubmit = async (e) => {
     e.preventDefault(); // khong refresh lai trang
     console.log(email, password);
@@ -94,8 +103,7 @@ const Login = ({ history }) => {
     <>
       <div className="container p-5">
         <div className="row">
-          <div className="col-md-6 offset-md-6">
-            
+          <div className="col-md-6 offset-md-3">
             {loading ? (
               <h4 className="text-danger">Loading...</h4>
             ) : (
@@ -106,11 +114,13 @@ const Login = ({ history }) => {
             <button
               type="submit"
               onClick={googleLogin}
-              className="btn btn-danger mt-1"
+              className="block btn btn-danger mt-1 "
             >
-              {" "}
               Login with Google
             </button>
+            <Link to="/forgot/password" className="block float-end ">
+              Forgot password
+            </Link>
           </div>
         </div>
       </div>
