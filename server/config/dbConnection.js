@@ -5,7 +5,7 @@ const getDBConnection = async () => {
     let connectionOptions = {
       user: process.env.USER,
       pass: process.env.PASSWORD,
-      dbName: process.env.maple,
+      dbName: process.env.DATABASE,
     };
 
     const dbConnection = mongoose.connect(
