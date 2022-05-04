@@ -15,7 +15,7 @@ const connectDB = require("./config/dbConnection");
 // Router imports
 const authRouter = require('./routes/auth')
 const categoryRouter = require('./routes/category')
-
+const subcategoryRouter = require('./routes/subcategory')
 // Establish database connection
 connectDB();
 
@@ -30,6 +30,7 @@ app.use(morgan("dev"));
 // using router
 app.use('/api',authRouter)
 app.use('/api',categoryRouter)
+app.use('/api',subcategoryRouter)
 
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 

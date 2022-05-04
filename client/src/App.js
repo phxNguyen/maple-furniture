@@ -21,6 +21,8 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import CategoryCreate from "./pages/admin/category/CategoryCreate"
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate"
 
+import SubcategoryCreate from "./pages/admin/subcategory/SubcategoryCreate"
+
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import History from "./pages/user/History";
@@ -82,6 +84,7 @@ const App = () => {
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute exact path="/admin/category" component={CategoryCreate} />
         <AdminRoute exact path="/admin/category/:slug" component={CategoryUpdate} />
+        <AdminRoute exact path="/admin/subcategory" component={SubcategoryCreate} />
       </Switch>
     </>
   );
