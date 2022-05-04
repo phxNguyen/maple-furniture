@@ -16,6 +16,7 @@ const connectDB = require("./config/dbConnection");
 const authRouter = require('./routes/auth')
 const categoryRouter = require('./routes/category')
 const subcategoryRouter = require('./routes/subcategory')
+const productRouter = require('./routes/product')
 // Establish database connection
 connectDB();
 
@@ -31,6 +32,8 @@ app.use(morgan("dev"));
 app.use('/api',authRouter)
 app.use('/api',categoryRouter)
 app.use('/api',subcategoryRouter)
+app.use('/api',subcategoryRouter)
+app.use('/api',productRouter)
 
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 
