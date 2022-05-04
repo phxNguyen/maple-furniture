@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { auth } from "../../firebase";
-import { toast } from "react-toastify";
+
+import { toast, ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
 
-const Register = ({history}) => {
+const Register = ({ history }) => {
   const [email, setEmail] = useState("");
 
   //redirect ve home page khi user da dang nhap
   const { user } = useSelector((state) => ({ ...state }));
   useEffect(() => {
     if (user && user.token) history.push("/");
-  }, [user]);
+  }, [user, history]);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // khong refresh lai trang
 
     const config = {
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      url: process.env.REACT_APP_REGISTER_REDIRECT_URL || 'http://localhost:3000/register/complete',
       handleCodeInApp: true,
     };
 
     await auth.sendSignInLinkToEmail(email, config);
+    
     toast.success(
-      `Vefication link is sent to ${email}. Click the link to complete your regis`
+      `Email is sent to ${email}. Click the link to complete your registration `
     );
 
     // save email xuong local storage, sau khi click vao link roi khoi phai nhap email dang nhap lai
@@ -42,8 +44,7 @@ const Register = ({history}) => {
           autoFocus
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button type="submit" className="btn btn-primary mt-1">
-          {" "}
+        <button className="btn btn-light" type="submit">
           Register
         </button>
       </form>

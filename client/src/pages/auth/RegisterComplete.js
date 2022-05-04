@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { auth } from "../../firebase";
+
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,13 +12,13 @@ const RegisterComplete = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { user } = useSelector((state) => ({ ...state }));
+  //const { user } = useSelector((state) => ({ ...state }));
   let dispatch = useDispatch();
 
   // Lay email tu local storage gan' vao o email
   useEffect(() => {
     setEmail(window.localStorage.getItem("emailForRegistration"));
-  }, []);
+  }, [history]);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // khong refresh lai trang
@@ -30,7 +31,7 @@ const RegisterComplete = ({ history }) => {
       return toast.error('password must be at least 6 characters');
     }
     try {
-      const result = await auth.signInWithEmailLink( email, window.location.href);
+      const result = await auth.signInWithEmailLink(  email, window.location.href);
       //console.log(result);
 
       if(result.user.emailVerified){
@@ -38,7 +39,7 @@ const RegisterComplete = ({ history }) => {
         // xoa user email ra khoi local storage
         window.localStorage.removeItem('emailForRegistration');
         // get user.id.token
-        let user = auth.currentUser
+        let user = auth.currentUser;
         await user.updatePassword(password);
         const idTokenResult = await user.getIdTokenResult();
         //redux store

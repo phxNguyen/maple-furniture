@@ -9,7 +9,8 @@ import {
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import firebase from "firebase/compat/app";
+
+import firebase from "firebase";
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
@@ -42,13 +43,27 @@ const Header = () => {
           </Item>
 
           {user && (
-            <SubMenu key="SubMenu" title={user.email && user.email.split('@')[0]} className="float-end">
-              <Item key="setting:1">Option 1</Item>
-              <Item key="setting:2">Option 2</Item>
-              <Item icon={<LogoutOutlined />} onClick={logout}>
-                Logout
+            <SubMenu
+            //icon={<SettingOutlined />}
+            title={user.email && user.email.split("@")[0]}
+            className="float-end"
+          >
+            {user && user.role === "subscriber" && (
+              <Item>
+                <Link to="/user/history">Dashboard</Link>
               </Item>
-            </SubMenu>
+            )}
+  
+            {user && user.role === "admin" && (
+              <Item>
+                <Link to="/admin/dashboard">Dashboard</Link>
+              </Item>
+            )}
+  
+            <Item icon={<LogoutOutlined />} onClick={logout}>
+              Logout
+            </Item>
+          </SubMenu>
           )}
 
           {!user && (
