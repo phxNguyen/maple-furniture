@@ -44,7 +44,7 @@ const RegisterComplete = ({ history }) => {
         const idTokenResult = await user.getIdTokenResult();
         //redux store
 
-          console.log('user', user, ' idToken', idTokenResult);
+          //console.log('user', user, ' idToken', idTokenResult);
 
           createOrUpdateUser(idTokenResult.token)
           .then((res) => {

@@ -4,47 +4,47 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { getCategories } from "../../../services/category";
 import {
-  createSubcategory,
+  updateSubcategory,
   getSubcategory,
-  removeSubcategory,
-  getSubcategories,
 } from "../../../services/subcategory";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import CategoryForm from "../../../components/forms/CategoryForm";
 import LocalSearch from "../../../components/forms/LocalSearch";
 
-const SubCreate = () => {
+const SubcategoryUpdate = ({ match, history }) => {
   const { user } = useSelector((state) => ({ ...state }));
 
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState("");
-  const [subs, setSubs] = useState([]);
-  // step 1
-  const [keyword, setKeyword] = useState("");
+  const [parent, setParent] = useState("");
 
   useEffect(() => {
     loadCategories();
-    loadSubs();
+    loadSub();
   }, []);
 
   const loadCategories = () =>
     getCategories().then((c) => setCategories(c.data));
-  const loadSubs = () => getSubcategories().then((s) => setSubs(s.data));
+
+  const loadSub = () =>
+    getSubcategory(match.params.slug).then((s) => {
+      setName(s.data.name);
+      setParent(s.data.parent);
+    });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(name);
     setLoading(true);
-    createSubcategory({ name, parent: category }, user.token)
+    updateSubcategory(match.params.slug, { name, parent }, user.token)
       .then((res) => {
         // console.log(res)
         setLoading(false);
         setName("");
-        toast.success(`"${res.data.name}" is created`);
-        loadSubs();
+        toast.success(`"${res.data.name}" is updated`);
+        history.push("/admin/subcategory");
       })
       .catch((err) => {
         console.log(err);
@@ -52,29 +52,6 @@ const SubCreate = () => {
         if (err.response.status === 400) toast.error(err.response.data);
       });
   };
-
-  const handleRemove = async (slug) => {
-    // let answer = window.confirm("Delete?");
-    // console.log(answer, slug);
-    if (window.confirm("Delete?")) {
-      setLoading(true);
-      removeSubcategory(slug, user.token)
-        .then((res) => {
-          setLoading(false);
-          toast.error(`${res.data.name} deleted`);
-          loadSubs();
-        })
-        .catch((err) => {
-          if (err.response.status === 400) {
-            setLoading(false);
-            toast.error(err.response.data);
-          }
-        });
-    }
-  };
-
-  // step 4
-  const searched = (keyword) => (c) => c.name.toLowerCase().includes(keyword);
 
   return (
     <div className="container-fluid">
@@ -86,7 +63,7 @@ const SubCreate = () => {
           {loading ? (
             <h4 className="text-danger">Loading..</h4>
           ) : (
-            <h4>Create sub category</h4>
+            <h4>Update sub category</h4>
           )}
 
           <div className="form-group">
@@ -94,50 +71,27 @@ const SubCreate = () => {
             <select
               name="category"
               className="form-control"
-              onChange={(e) => setCategory(e.target.value)}
+              onChange={(e) => setParent(e.target.value)}
             >
-              <option>Select one of those categories</option>
+              <option>Please select</option>
               {categories.length > 0 &&
                 categories.map((c) => (
-                  <option key={c._id} value={c._id}>
+                  <option key={c._id} value={c._id} selected={c._id === parent}>
                     {c.name}
                   </option>
                 ))}
             </select>
           </div>
 
-          
-
           <CategoryForm
             handleSubmit={handleSubmit}
             name={name}
             setName={setName}
           />
-
-          {/* step 2 and step 3 */}
-          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-
-          {/* step 5 */}
-          {subs.filter(searched(keyword)).map((s) => (
-            <div className="alert alert-dark" key={s._id}>
-              {s.name}
-              <span
-                onClick={() => handleRemove(s.slug)}
-                className="btn btn-sm float-end"
-              >
-                <DeleteOutlined className="text-danger" />
-              </span>
-              <Link to={`/admin/subcategory/${s.slug}`}>
-                <span className="btn btn-sm float-end">
-                  <EditOutlined className="text-warning" />
-                </span>
-              </Link>
-            </div>
-          ))}
         </div>
       </div>
     </div>
   );
 };
 
-export default SubCreate;
+export default SubcategoryUpdate;

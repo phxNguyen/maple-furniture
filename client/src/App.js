@@ -22,6 +22,7 @@ import CategoryCreate from "./pages/admin/category/CategoryCreate"
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate"
 
 import SubcategoryCreate from "./pages/admin/subcategory/SubcategoryCreate"
+import SubcategoryUpdate from "./pages/admin/subcategory/SubcategoryUpdate";
 
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
@@ -85,6 +86,7 @@ const App = () => {
         <AdminRoute exact path="/admin/category" component={CategoryCreate} />
         <AdminRoute exact path="/admin/category/:slug" component={CategoryUpdate} />
         <AdminRoute exact path="/admin/subcategory" component={SubcategoryCreate} />
+        <AdminRoute exact path="/admin/subcategory/:slug" component={SubcategoryUpdate} />
       </Switch>
     </>
   );

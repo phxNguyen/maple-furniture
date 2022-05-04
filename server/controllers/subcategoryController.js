@@ -3,8 +3,10 @@ const slugify = require("slugify");
 
 exports.create = async (req, res) => {
   try {
-    const { name, parent} = req.body;
-    res.json(await new Subcategory({ name, parent, slug: slugify(name) }).save());
+    const { name, parent } = req.body;
+    res.json(
+      await new Subcategory({ name, parent, slug: slugify(name) }).save()
+    );
   } catch (err) {
     res.status(400).send("Create subcategory failed");
   }
@@ -15,15 +17,15 @@ exports.list = async (req, res) =>
 
 exports.read = async (req, res) => {
   let subcategory = await Subcategory.findOne({ slug: req.params.slug }).exec();
-  res.json(category);
+  res.json(subcategory);
 };
 
 exports.update = async (req, res) => {
-  const { name } = req.body;
+  const { name, parent} = req.body;
   try {
     const updated = await Subcategory.findOneAndUpdate(
       { slug: req.params.slug },
-      { name, slug: slugify(name) },
+      { name, parent, slug: slugify(name) },
       { new: true }
     );
     res.json(updated);
@@ -34,7 +36,9 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    const deleted = await Subcategory.findOneAndDelete({ slug: req.params.slug });
+    const deleted = await Subcategory.findOneAndDelete({
+      slug: req.params.slug,
+    });
     res.json(deleted);
   } catch (err) {
     res.status(400).send("delete subcategory failed");
