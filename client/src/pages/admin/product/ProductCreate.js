@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { createProduct } from "../../../services/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../services/category";
+import FileUpload from "../../../components/forms/FileUpload";
 const initialState = {
   title: "",
   descriptioin: "",
@@ -54,21 +55,18 @@ const ProductCreate = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
     // console.log(e.target.name, " ----- ", e.target.value);
-   
   };
 
   const handleCatagoryChange = (e) => {
     e.preventDefault();
     console.log("CLICKED CATEGORY", e.target.value);
-    setValues({ ...values, subs:[],category: e.target.value });
+    setValues({ ...values, subs: [], category: e.target.value });
     getCategorySubs(e.target.value).then((res) => {
       console.log("SUB OPTIONS ON CATGORY CLICK", res);
       setSubOptions(res.data);
     });
-    setShowSub(true)
+    setShowSub(true);
   };
-
-
 
   return (
     <div className="container-fluid">
@@ -82,7 +80,9 @@ const ProductCreate = () => {
           <hr />
 
           {/* //{JSON.stringify(values)} */}
-
+          <div className="">
+            <FileUpload />
+          </div>
           <ProductCreateForm
             handleSubmit={handleSubmit}
             handleChange={handleChange}
