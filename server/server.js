@@ -17,6 +17,7 @@ const authRouter = require('./routes/auth')
 const categoryRouter = require('./routes/category')
 const subcategoryRouter = require('./routes/subcategory')
 const productRouter = require('./routes/product')
+const cloudinaryRouter = require('./routes/cloudinary')
 // Establish database connection
 connectDB();
 
@@ -34,6 +35,7 @@ app.use('/api',categoryRouter)
 app.use('/api',subcategoryRouter)
 app.use('/api',subcategoryRouter)
 app.use('/api',productRouter)
+app.use('/api',categoryRouter)
 
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 

@@ -15,39 +15,37 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import Home from "./pages/Home";
 import RegisterComplete from "./pages/auth/RegisterComplete";
-import ForgotPassword  from "./pages/auth/ForgotPassword";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 
 import AdminDashboard from "./pages/admin/Dashboard";
-import CategoryCreate from "./pages/admin/category/CategoryCreate"
-import CategoryUpdate from "./pages/admin/category/CategoryUpdate"
+import CategoryCreate from "./pages/admin/category/CategoryCreate";
+import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 
-import SubcategoryCreate from "./pages/admin/subcategory/SubcategoryCreate"
+import SubcategoryCreate from "./pages/admin/subcategory/SubcategoryCreate";
 import SubcategoryUpdate from "./pages/admin/subcategory/SubcategoryUpdate";
+
+import ProductCreate from "./pages/admin/product/ProductCreate";
 
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import History from "./pages/user/History";
-
 
 // Import Conponents
 import Header from "./components/nav/Header";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoutes";
 
-
 // Import Services
 import { currentUser } from "./services/auth";
 
-
 const App = () => {
-
   const dispatch = useDispatch();
 
   // check auth state
-  useEffect(() =>{
-    const unsubcribe = auth.onAuthStateChanged( async (user) =>{
-      if(user){
-        const idTokenResult = await user.getIdTokenResult ()
+  useEffect(() => {
+    const unsubcribe = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        const idTokenResult = await user.getIdTokenResult();
         //console.log(user)
         currentUser(idTokenResult.token)
           .then((res) => {
@@ -64,11 +62,10 @@ const App = () => {
           })
           .catch((err) => console.log(err));
       }
-
     });
     //clean up
-    return () =>unsubcribe();
-  },[dispatch])
+    return () => unsubcribe();
+  }, [dispatch]);
   return (
     <>
       <Header />
@@ -84,9 +81,22 @@ const App = () => {
         <UserRoute exact path="/user/password" component={Password} />
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
         <AdminRoute exact path="/admin/category" component={CategoryCreate} />
-        <AdminRoute exact path="/admin/category/:slug" component={CategoryUpdate} />
-        <AdminRoute exact path="/admin/subcategory" component={SubcategoryCreate} />
-        <AdminRoute exact path="/admin/subcategory/:slug" component={SubcategoryUpdate} />
+        <AdminRoute
+          exact
+          path="/admin/category/:slug"
+          component={CategoryUpdate}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory"
+          component={SubcategoryCreate}
+        />
+        <AdminRoute
+          exact
+          path="/admin/subcategory/:slug"
+          component={SubcategoryUpdate}
+        />
+        <AdminRoute exact path="/admin/product" component={ProductCreate} />
       </Switch>
     </>
   );
