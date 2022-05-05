@@ -35,7 +35,7 @@ app.use('/api',categoryRouter)
 app.use('/api',subcategoryRouter)
 app.use('/api',subcategoryRouter)
 app.use('/api',productRouter)
-app.use('/api',categoryRouter)
+app.use('/api',cloudinaryRouter)
 
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 
