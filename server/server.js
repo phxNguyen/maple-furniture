@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const fs = require("fs");
 const dotenv = require("dotenv");
+const bodyParser = require("body-parser");
 
 // Load env config
 dotenv.config({ path: "./config/config.env" });
@@ -13,29 +14,31 @@ dotenv.config({ path: "./config/config.env" });
 const connectDB = require("./config/dbConnection");
 
 // Router imports
-const authRouter = require('./routes/auth')
-const categoryRouter = require('./routes/category')
-const subcategoryRouter = require('./routes/subcategory')
-const productRouter = require('./routes/product')
-const cloudinaryRouter = require('./routes/cloudinary')
+const authRouter = require("./routes/auth");
+const categoryRouter = require("./routes/category");
+const subcategoryRouter = require("./routes/subcategory");
+const productRouter = require("./routes/product");
+const cloudinaryRouter = require("./routes/cloudinary");
 // Establish database connection
 connectDB();
 
 const app = express();
 
 // Middlewares
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
+app.use(bodyParser.json({ limit: "2mb" }));
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true}));
 app.use(cors());
+app.options("*", cors());
 app.use(morgan("dev"));
 
 // using router
-app.use('/api',authRouter)
-app.use('/api',categoryRouter)
-app.use('/api',subcategoryRouter)
-app.use('/api',subcategoryRouter)
-app.use('/api',productRouter)
-app.use('/api',cloudinaryRouter)
+app.use("/api", authRouter);
+app.use("/api", categoryRouter);
+app.use("/api", subcategoryRouter);
+app.use("/api", subcategoryRouter);
+app.use("/api", productRouter);
+app.use("/api", cloudinaryRouter);
 
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 
