@@ -17,7 +17,7 @@ import Home from "./pages/Home";
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
-import AdminDashboard from "./pages/admin/Dashboard";
+import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 
@@ -25,6 +25,7 @@ import SubcategoryCreate from "./pages/admin/subcategory/SubcategoryCreate";
 import SubcategoryUpdate from "./pages/admin/subcategory/SubcategoryUpdate";
 
 import ProductCreate from "./pages/admin/product/ProductCreate";
+import AllProducts from "./pages/admin/product/AllProducts";
 
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
@@ -97,6 +98,7 @@ const App = () => {
           component={SubcategoryUpdate}
         />
         <AdminRoute exact path="/admin/product" component={ProductCreate} />
+        <AdminRoute exact path="/admin/products" component={AllProducts} />
       </Switch>
     </>
   );
