@@ -56,14 +56,14 @@ const productSchema = new mongoose.Schema(
     },
     brand: {
       type: String,
-      enum: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd "],
+      enum: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd"],
     },
-    // ratings: [
-    //   {
-    //     star: Number,
-    //     postedBy: { type: ObjectId, ref: "User" },
-    //   },
-    // ],
+    ratings: [
+      {
+        star: Number,
+        postedBy: { type: ObjectId, ref: "User" },
+      },
+    ],
   },
   { timestamps: true }
 );

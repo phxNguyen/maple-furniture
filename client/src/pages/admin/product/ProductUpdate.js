@@ -19,7 +19,7 @@ const initialState = {
   quantity: "",
   images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
-  brands: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd "],
+  brands: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd"],
   color: "",
   brand: "",
 };

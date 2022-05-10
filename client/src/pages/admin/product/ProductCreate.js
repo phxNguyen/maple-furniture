@@ -6,6 +6,7 @@ import { createProduct } from "../../../services/product";
 import ProductCreateForm from "../../../components/forms/ProductCreateForm";
 import { getCategories, getCategorySubs } from "../../../services/category";
 import FileUpload from "../../../components/forms/FileUpload";
+import { LoadingOutlined } from "@ant-design/icons";
 const initialState = {
   title: "",
   descriptioin: "",
@@ -17,7 +18,7 @@ const initialState = {
   quantity: "",
   images: [],
   colors: ["Black", "Brown", "Silver", "White", "Blue"],
-  brands: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd "],
+  brands: ["Hoaphat", "JYSK", "IKEA", "Herman Miller", "Floyd"],
   color: "",
   brand: "",
 };
@@ -77,10 +78,14 @@ const ProductCreate = () => {
         </div>
 
         <div className="col-md-10">
-          <h4>Product create</h4>
+          {loading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4>Product create</h4>
+          )}
           <hr />
 
-          {JSON.stringify(values.images)}
+          {/* {JSON.stringify(values.images)} */}
 
           <div className="p-3">
             <FileUpload

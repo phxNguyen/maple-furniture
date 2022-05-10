@@ -1,0 +1,11 @@
+.slider img{
+  object-fit: cover;
+}
+.card-image {
+  
+  object-fit: cover;
+}
+.carousel-slider,
+.carousel{
+  width: 50%;
+}

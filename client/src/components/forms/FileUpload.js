@@ -116,6 +116,6 @@ const FileUpload = ({ values, setValues, setLoading }) => {
       </div>
     </>
   );
-};
+}; 
 
 export default FileUpload;

@@ -13,7 +13,10 @@ import { useDispatch } from "react-redux";
 // Import Pages
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+
 import Home from "./pages/Home";
+import Product from "./pages/Product";
+
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 
@@ -100,7 +103,12 @@ const App = () => {
         />
         <AdminRoute exact path="/admin/product" component={ProductCreate} />
         <AdminRoute exact path="/admin/products" component={AllProducts} />
-        <AdminRoute exact path="/admin/product/:slug" component={ProductUpdate} />
+        <AdminRoute
+          exact
+          path="/admin/product/:slug"
+          component={ProductUpdate}
+        />
+        <Route exact path="/product/:slug" component={Product} />
       </Switch>
     </>
   );
