@@ -16,6 +16,10 @@ import Register from "./pages/auth/Register";
 
 import Home from "./pages/Home";
 import Product from "./pages/Product";
+import Shop from "./pages/Shop";
+
+import CategoryHome from "./pages/category/CategoryHome";
+import SubHome from "./pages/sub/SubHome";
 
 import RegisterComplete from "./pages/auth/RegisterComplete";
 import ForgotPassword from "./pages/auth/ForgotPassword";
@@ -109,6 +113,9 @@ const App = () => {
           component={ProductUpdate}
         />
         <Route exact path="/product/:slug" component={Product} />
+        <Route exact path="/category/:slug" component={CategoryHome} />
+        <Route exact path="/subcategory/:slug" component={SubHome} />
+        <Route exact path="/shop" component={Shop} />
       </Switch>
     </>
   );

@@ -7,9 +7,11 @@ import {
   UserOutlined,
   UserAddOutlined,
   LogoutOutlined,
+  ShoppingOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import Search from "../forms/Search";
 
 import firebase from "firebase";
 const { SubMenu, Item } = Menu;
@@ -40,6 +42,13 @@ const Header = () => {
       <Item key="home" icon={<AppstoreOutlined />}>
         <Link to="/">Home</Link>
       </Item>
+      <Item className=" float-end " key="shop" icon={<ShoppingOutlined />}>
+        <Link to="/shop">Shop</Link>
+      </Item>
+
+      <span className=" float-end p-1 mt-1">
+        <Search />
+      </span>
 
       <div style={rightStyle}>
         {!user && (

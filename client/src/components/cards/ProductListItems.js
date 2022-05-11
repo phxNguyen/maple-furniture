@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { showAverage } from "../../services/rating";
 const ProductListItems = ({ product }) => {
   const { price, category, subs, delivery, color, brand, quantity, sold } =
     product;
@@ -71,8 +71,15 @@ const ProductListItems = ({ product }) => {
 
       <li className="list-group-item  border-0">
         Sold{" "}
+        <span className="label label-default label-pill float-end">{sold}</span>
+      </li>
+
+      <li className="list-group-item  border-0">
+        Rating{" "}
         <span className="label label-default label-pill float-end">
-          {sold}
+          {product && product.ratings && product.ratings.length > 0
+            ? showAverage(product)
+            : "No rating yet"}
         </span>
       </li>
     </ul>

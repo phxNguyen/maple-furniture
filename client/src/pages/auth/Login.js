@@ -18,17 +18,31 @@ const Login = ({ history }) => {
 
   //redirect ve home page khi user da dang nhap
   const { user } = useSelector((state) => ({ ...state }));
-  useEffect(() => {
-    if (user && user.token) history.push("/");
-  }, [user, history]);
+
+
+
+  // useEffect(() => {
+  //   let intended = history.location.state;
+  //   if (intended) {
+  //     return;
+  //   } else {
+  //     if (user && user.token) history.push("/");
+  //   }
+  // }, [user, history]);
 
   let dispatch = useDispatch();
 
   const roleBasedRedirect = (res) => {
-    if (res.data.role === "admin") {
-      history.push("/admin/dashboard");
+    // check if intended
+    let intended = history.location.state;
+    if (intended) {
+      history.push(intended.from);
     } else {
-      history.push("/user/history");
+      if (res.data.role === "admin") {
+        history.push("/admin/dashboard");
+      } else {
+        history.push("/user/history");
+      }
     }
   };
 
