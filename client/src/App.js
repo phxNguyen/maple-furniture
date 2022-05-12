@@ -17,6 +17,8 @@ import Register from "./pages/auth/Register";
 import Home from "./pages/Home";
 import Product from "./pages/Product";
 import Shop from "./pages/Shop";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
@@ -35,6 +37,8 @@ import ProductCreate from "./pages/admin/product/ProductCreate";
 import AllProducts from "./pages/admin/product/AllProducts";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
 
+import CreateCouponPage from "./pages/admin/coupon/CreateCouponPage";
+
 import Password from "./pages/user/Password";
 import Wishlist from "./pages/user/Wishlist";
 import History from "./pages/user/History";
@@ -43,6 +47,7 @@ import History from "./pages/user/History";
 import Header from "./components/nav/Header";
 import UserRoute from "./components/routes/UserRoute";
 import AdminRoute from "./components/routes/AdminRoutes";
+import SideDrawer from "./components/drawer/SideDrawer";
 
 // Import Services
 import { currentUser } from "./services/auth";
@@ -78,6 +83,7 @@ const App = () => {
   return (
     <>
       <Header />
+      <SideDrawer />
       <ToastContainer />
       <Switch>
         <Route exact path="/" component={Home} />
@@ -116,6 +122,10 @@ const App = () => {
         <Route exact path="/category/:slug" component={CategoryHome} />
         <Route exact path="/subcategory/:slug" component={SubHome} />
         <Route exact path="/shop" component={Shop} />
+        <Route exact path="/cart" component={Cart} />
+
+        <UserRoute exact path="/checkout" component={Checkout} />
+        <AdminRoute exact path="/admin/coupon" component={CreateCouponPage} />
       </Switch>
     </>
   );

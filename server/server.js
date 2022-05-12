@@ -19,6 +19,10 @@ const categoryRouter = require("./routes/category");
 const subcategoryRouter = require("./routes/subcategory");
 const productRouter = require("./routes/product");
 const cloudinaryRouter = require("./routes/cloudinary");
+const userRouter= require('./routes/user')
+const stripeRouter = require('./routes/stripe')
+const couponRouter = require('./routes/coupon')
+const adminRouter = require('./routes/admin')
 // Establish database connection
 connectDB();
 
@@ -39,7 +43,8 @@ app.use("/api", subcategoryRouter);
 app.use("/api", subcategoryRouter);
 app.use("/api", productRouter);
 app.use("/api", cloudinaryRouter);
-
+app.use("/api", userRouter);
+//app.use("/api", stripeRouter);
 //fs.readdirSync("./routes").map((r) => app.use("/api", require("./routes/" + r)));
 
 const PORT = process.env.PORT || 5000;

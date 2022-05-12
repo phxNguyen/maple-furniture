@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import React, { useState } from "react";
-import { Menu } from "antd";
+import { Menu, Badge } from "antd";
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -8,6 +8,7 @@ import {
   UserAddOutlined,
   LogoutOutlined,
   ShoppingOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -21,7 +22,7 @@ const Header = () => {
 
   let dispatch = useDispatch();
 
-  let { user } = useSelector((state) => ({ ...state }));
+  let { user ,cart} = useSelector((state) => ({ ...state }));
   let history = useHistory();
 
   const handleClick = (e) => {
@@ -44,6 +45,13 @@ const Header = () => {
       </Item>
       <Item className=" float-end " key="shop" icon={<ShoppingOutlined />}>
         <Link to="/shop">Shop</Link>
+      </Item>
+      <Item key="cart" icon={<ShoppingCartOutlined />}>
+        <Link to="/cart">
+          <Badge count={cart.length} offset={[9, 0]}>
+            Cart
+          </Badge>
+        </Link>
       </Item>
 
       <span className=" float-end p-1 mt-1">
