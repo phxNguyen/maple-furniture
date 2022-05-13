@@ -62,7 +62,7 @@ const Shop = () => {
   useEffect(() => {
     const delayed = setTimeout(() => {
       fetchProducts({ query: text });
-      if(!text){
+      if (!text) {
         loadAllProducts();
       }
     }, 300);
@@ -195,6 +195,7 @@ const Shop = () => {
   const showBrands = () =>
     brands.map((b) => (
       <Radio
+        key={b}
         value={b}
         name={b}
         checked={b === brand}
@@ -259,7 +260,9 @@ const Shop = () => {
                 </span>
               }
             >
-              <div className="ms-4 me-4" style={{ maringTop: "-10px" }}>{showCategories()}</div>
+              <div className="ms-4 me-4" style={{ maringTop: "-10px" }}>
+                {showCategories()}
+              </div>
             </SubMenu>
 
             {/* stars */}
@@ -271,7 +274,9 @@ const Shop = () => {
                 </span>
               }
             >
-              <div className="ms-4 me-4" style={{ maringTop: "-10px" }}>{showStars()}</div>
+              <div className="ms-4 me-4" style={{ maringTop: "-10px" }}>
+                {showStars()}
+              </div>
             </SubMenu>
 
             {/* sub category */}

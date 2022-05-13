@@ -38,13 +38,13 @@ const CreateCouponPage = () => {
         setName("");
         setDiscount("");
         setExpiry("");
-        toast.success(`"${res.data.name}" is created`);
+        toast.success(`"${res.data.name}" is created (●'◡'●)`);
       })
       .catch((err) => console.log("create coupon err", err));
   };
 
   const handleRemove = (couponId) => {
-    if (window.confirm("Delete?")) {
+    if (window.confirm("Are you sure to delete this item?")) {
       setLoading(true);
       removeCoupon(couponId, user.token)
         .then((res) => {
@@ -64,7 +64,7 @@ const CreateCouponPage = () => {
         </div>
         <div className="col-md-10">
           {loading ? (
-            <h4 className="text-danger">Loading...</h4>
+            <h4 className="">Loading...</h4>
           ) : (
             <h4>Coupon</h4>
           )}
@@ -105,7 +105,7 @@ const CreateCouponPage = () => {
               />
             </div>
 
-            <button className="btn btn-outline-primary">Save</button>
+            <button className="btn btn-outline-primary mt-2">Save</button>
           </form>
 
           <br />

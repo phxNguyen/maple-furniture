@@ -19,6 +19,7 @@ import Product from "./pages/Product";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import Payment from "./pages/Payment";
 
 import CategoryHome from "./pages/category/CategoryHome";
 import SubHome from "./pages/sub/SubHome";
@@ -36,6 +37,7 @@ import SubcategoryUpdate from "./pages/admin/subcategory/SubcategoryUpdate";
 import ProductCreate from "./pages/admin/product/ProductCreate";
 import AllProducts from "./pages/admin/product/AllProducts";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
+
 
 import CreateCouponPage from "./pages/admin/coupon/CreateCouponPage";
 
@@ -126,6 +128,7 @@ const App = () => {
 
         <UserRoute exact path="/checkout" component={Checkout} />
         <AdminRoute exact path="/admin/coupon" component={CreateCouponPage} />
+        <UserRoute exact path="/payment" component={Payment} />
       </Switch>
     </>
   );
